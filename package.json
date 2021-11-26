@@ -5,6 +5,10 @@
   "repository": "https://github.com/ReactSoft-UdeA/reactsoft.api.git",
   "author": "Leonardo Ramirez <angelr521@hotmail.com>",
   "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
   "dependencies": {
     "express": "^4.17.1",
     "mongoose": "^6.0.13"
