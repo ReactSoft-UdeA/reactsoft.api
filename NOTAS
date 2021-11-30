@@ -1,0 +1,4 @@
+Cada carpeta del modelo debe contener:
+    1. el modelo de moongose
+    2. los types
+    3. Los resolvers
