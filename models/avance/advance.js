@@ -1,5 +1,4 @@
 import mongoose from 'mongoose';
-
 const { Schema, model } = mongoose;
 
 const avanceSchema = new Schema({
@@ -17,10 +16,10 @@ const avanceSchema = new Schema({
         }
     ],
     proyecto: {
-        type:Number
+        type:String
     },
     usuarioRegistra: {
-        type:Number
+        type:String
     }
 })
 

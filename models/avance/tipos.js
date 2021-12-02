@@ -1,19 +1,19 @@
-import {gql} from 'apollo-server-express'
+/* import {gql} from 'apollo-server-express'
 
 const typeDefs = gql`{
 
-    type avance{
+    type Avance{
         _id:ID!,
         fechaAvance:String!,
         descripcionAvance:String!,
-        observaciones:Array<String>!,
-        proyecto:Number!,
-        usuarioRegistra:Number!
+        observaciones:String,
+        proyecto:String!,
+        usuarioRegistra:String!
     }
     
     type Query{
-        avances:[avance]
+        Avances:[Avance]
     }
 }`;
 
-export {typeDefs};
+export {typeDefs}; */

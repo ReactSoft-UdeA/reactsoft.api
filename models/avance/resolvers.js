@@ -1,4 +1,4 @@
-import modeloAvance from "./Advance"
+/* import modeloAvance from "./Advance"
 
 const AvanceResolvers = {
     Query:{
@@ -9,4 +9,4 @@ const AvanceResolvers = {
     }
 }
 
-export { AvanceResolvers };
+export { AvanceResolvers }; */
