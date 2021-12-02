@@ -27,8 +27,18 @@ const typeDefs = gql`
             proyecto:String!,
             usuarioRegistra:String!
         ):Avance
+    
+        EditarAvance(
+            _id:ID,
+            fechaAvance:String!,
+            descripcionAvance:String!,
+            observaciones:[String],
+            proyecto:String!,
+            usuarioRegistra:String!
+        ):Avance    
+    
+        EliminarAvance(_id:String!):Avance    
     }
-
 `;
 
 export {typeDefs};
