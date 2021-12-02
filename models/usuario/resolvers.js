@@ -20,6 +20,7 @@ const resolversUsuario = {
         identificacion: args.identificacion,
         correo: args.correo,
         rol: args.rol,
+        clave: args.clave,
       });
 
       if (Object.keys(args).includes('estado')) {
@@ -36,6 +37,7 @@ const resolversUsuario = {
         correo: args.correo,
         rol: args.rol,
         estado: args.estado,
+        clave: args.clave,
       });
 
       return usuarioEditado;
