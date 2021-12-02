@@ -1,12 +1,13 @@
-import { gql } from "apollo-server-express";
+import { gql } from 'apollo-server-express';
+import { tiposEnums } from '../models/enums/tipos.js';
+import { tiposUsuario } from '../models/usuario/tipos.js';
 
-const typeDefs = gql`
-    type Usuario{
-        nombre: String!
-    }
-    type Query{
-        Usuarios:[Usuario]
-    }
+const tiposGlobales = gql`
+  scalar Date
 `;
 
-export {typeDefs};
+export const tipos = [
+  tiposGlobales,
+  tiposUsuario,
+  tiposEnums,
+];
