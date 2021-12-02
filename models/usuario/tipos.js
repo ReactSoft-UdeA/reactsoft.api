@@ -23,6 +23,7 @@ const tiposUsuario = gql`
       identificacion: String!
       correo: String!
       rol: Enum_Rol!
+      clave: String!
       estado: Enum_EstadoUsuario
     ): Usuario
 
@@ -33,6 +34,7 @@ const tiposUsuario = gql`
       identificacion: String!
       correo: String!
       rol: Enum_Rol!
+      clave: String!
       estado: Enum_EstadoUsuario
     ): Usuario
 

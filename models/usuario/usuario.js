@@ -2,17 +2,6 @@ import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
-  correo: {
-    type: String,
-    required: true,
-    unique: true,
-    validate: {
-      validator: (email) => {
-        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-      },
-      message: 'El formato del correo electrónico está malo.',
-    },
-  },
   identificacion: {
     type: String,
     required: true,
@@ -26,18 +15,33 @@ const userSchema = new Schema({
     type: String,
     required: true,
   },
+  correo: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: (email) => {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
+      },
+      message: 'Ingrese un correo electrónico válido',
+    },
+  },
   rol: {
     type: String,
     required: true,
-    enum: ['ESTUDIANTE', 'LIDER', 'ADMINISTRADOR'],
+    enum: ['Estudiante', 'Lider', 'Administrador'],
   },
   estado: {
     type: String,
-    enum: ['PENDIENTE', 'AUTORIZADO', 'NO_AUTORIZADO'],
-    default: 'PENDIENTE',
+    enum: ['Pendiente', 'Autorizado', 'No_Autorizado'],
+    default: 'Pendiente',
+  },
+  clave:{
+    type: String,
+    required: true,
   },
 });
 
-const UserModel = model('usuario', userSchema);
+const UserModel = model('usuarios', userSchema);
 
 export { UserModel };
