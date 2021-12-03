@@ -1,17 +1,23 @@
-import { gql } from "apollo-server-express";
-import { typesEnums } from "../models/enums/types.js";
-import { typesInscription } from "../models/inscription/types.js";
-import { typesProject } from "../models/project/types.js";
-import { typesUser } from "../models/user/types.js";
 
-const globalTypes = gql`
+
+import { gql } from 'apollo-server-express';
+import { tiposEnums } from '../models/enums/tipos.js';
+import { tiposProyecto } from '../models/proyecto/tipos.js';
+import { tiposUsuario } from '../models/usuario/tipos.js';
+import { tiposAvances } from '../models/avance/tipos.js';
+import { tiposInscription } from "../models/inscripcion/tipos.js";
+
+const tiposGlobales = gql`
   scalar Date
 `;
 
-export const types = [
-  globalTypes,
-  typesEnums,
-  typesInscription,
-  typesUser,
-  typesProject,
-];
+export const tipos = [
+  tiposGlobales,
+  tiposInscription
+  tiposUsuario,
+  tiposEnums,
+  tiposProyecto,
+  tiposAvances
+]
+
+
