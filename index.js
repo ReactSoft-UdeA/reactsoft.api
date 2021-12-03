@@ -3,7 +3,7 @@ import express from "express";
 import cors from 'cors';
 import {ApolloServer} from 'apollo-server-express';
 import dotenv from 'dotenv';
-import {typeDefs} from './graphql/types.js';
+import {tipos} from './graphql/types.js';
 import {resolvers} from './graphql/resolvers.js'
 
 //para que nos deje utilizar las variables de entorno en toda la aplicacion
@@ -12,7 +12,7 @@ dotenv.config();
 //Definir servidor GraphQL
 const server = new ApolloServer({
     //Definiciones de cada uno de los modelos
-    typeDefs: typeDefs,
+    typeDefs: tipos,
     //Controladores
     resolvers: resolvers,
 });

@@ -1,1 +1,0 @@
-// el modelo de graphql

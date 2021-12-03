@@ -1,1 +1,0 @@
-// van los querys y las mutaciones
