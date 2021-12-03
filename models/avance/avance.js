@@ -1,28 +1,34 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
+import { ProjectModel } from "../proyecto/proyecto.js";
+import { UserModel } from "../usuario/usuario.js";
 const { Schema, model } = mongoose;
 
 const avanceSchema = new Schema({
-    fechaAvance: {
-        type:String,
-        required:true
+  fechaAvance: {
+    type: Date,
+    required: true,
+  },
+  descripcion: {
+    type: String,
+    required: true,
+  },
+  observaciones: [
+    {
+      type: String,
     },
-    descripcionAvance: {
-        type:String,
-        required:true
-    },
-    observaciones: [
-        {
-            type:String
-        }
-    ],
-    proyecto: {
-        type:String
-    },
-    usuarioRegistra: {
-        type:String
-    }
-})
+  ],
+  proyecto: {
+    type: Schema.Types.ObjectId,
+    ref: ProjectModel,
+    required: true,
+  },
+  creadoPor: {
+    type: Schema.Types.ObjectId,
+    ref: UserModel,
+    required: true,
+  },
+});
 
-const modeloAvance = model('Avance', avanceSchema)
+const modeloAvance = model("Avance", avanceSchema);
 
 export default modeloAvance;
