@@ -1,20 +1,20 @@
 import conectarBD from "./db/db.js";
 import express from "express";
-import cors from 'cors';
-import {ApolloServer} from 'apollo-server-express';
-import dotenv from 'dotenv';
-import {typeDefs} from './graphql/types.js';
-import {resolvers} from './graphql/resolvers.js'
+import cors from "cors";
+import { ApolloServer } from "apollo-server-express";
+import dotenv from "dotenv";
+import { types } from "./graphql/types.js";
+import { resolvers } from "./graphql/resolvers.js";
 
 //para que nos deje utilizar las variables de entorno en toda la aplicacion
 dotenv.config();
 
 //Definir servidor GraphQL
 const server = new ApolloServer({
-    //Definiciones de cada uno de los modelos
-    typeDefs: typeDefs,
-    //Controladores
-    resolvers: resolvers,
+  //Definiciones de cada uno de los modelos
+  typeDefs: types, //nombre (importaciones globales graphql/types)
+  //Controladores
+  resolvers: resolvers,
 });
 
 //Aplicacion express
@@ -27,11 +27,11 @@ app.use(express.json());
 app.use(cors());
 
 //Puerto de escucha, onde corre el servidor
-app.listen({port: process.env.PORT || 4000}, async () => {
-    await conectarBD();
-    await server.start();
+app.listen({ port: process.env.PORT || 4000 }, async () => {
+  await conectarBD();
+  await server.start();
 
-    server.applyMiddleware({ app });
+  server.applyMiddleware({ app });
 
-    console.log('Servidor Listo!!');
+  console.log("Servidor Listo!!");
 });

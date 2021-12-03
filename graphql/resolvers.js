@@ -1,12 +1,9 @@
-const resolvers = {
-    Query:{
-        Usuarios: [
-            {
-                "nombre":"Leonardo"
-            },
-        ],
-    },
-   
-};
+import { resolversInscriptions } from "../models/inscription/resolvers.js";
+import { resolversUser } from "../models/user/resolvers.js";
+import { resolversProject } from "../models/project/resolvers.js";
 
-export {resolvers};
+export const resolvers = [
+  resolversUser,
+  resolversProject,
+  resolversInscriptions,
+];
