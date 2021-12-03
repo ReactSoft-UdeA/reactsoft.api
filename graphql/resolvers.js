@@ -1,9 +1,3 @@
-import { resolversInscriptions } from "../models/inscription/resolvers.js";
-import { resolversUser } from "../models/user/resolvers.js";
-import { resolversProject } from "../models/project/resolvers.js";
+import { resolversInscripciones } from "../models/inscripcion/resolvers.js";
 
-export const resolvers = [
-  resolversUser,
-  resolversProject,
-  resolversInscriptions,
-];
+export const resolvers = [resolversInscripciones];

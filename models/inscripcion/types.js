@@ -1,6 +1,6 @@
 import { gql } from "apollo-server-express";
 
-const typesInscription = gql`
+const tiposInscripcion = gql`
   type Inscripcion {
     _id: ID!
     estado: Enum_EstadoInscripcion!
@@ -25,4 +25,4 @@ const typesInscription = gql`
   }
 `;
 
-export { typesInscription };
+export { tiposInscripcion };

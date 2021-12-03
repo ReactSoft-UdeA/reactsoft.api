@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
-import { ProjectModel } from "../project/project.js";
-import { UserModel } from "../user/user.js";
+// import { Enum_EstadoInscripcion } from '../enums/enums.js';
+import { ProjectModel } from "../proyecto/proyecto.js";
+import { UserModel } from "../usuario/usuario.js";
 
 const { Schema, model } = mongoose;
 
@@ -8,7 +9,7 @@ const inscriptionSchema = new Schema({
   estado: {
     type: String,
     enum: ["ACEPTADO", "RECHAZADO", "PENDIENTE"],
-    default: "PENDIENTE", //Pendiente cuando se crea
+    default: "PENDIENTE",
     required: true,
   },
   fechaIngreso: {
@@ -21,16 +22,16 @@ const inscriptionSchema = new Schema({
   },
   proyecto: {
     type: Schema.Types.ObjectId,
-    ref: ProjectModel, //conexion con tabla "Proyectos"
+    ref: ProjectModel,
     required: true,
   },
   estudiante: {
     type: Schema.Types.ObjectId,
-    ref: UserModel, //conexion con tabla "Usuarios"
+    ref: UserModel,
     required: true,
   },
 });
 
-const InscriptionModel = model("Inscription", inscriptionSchema);
+const InscriptionModel = model("Inscripcion", inscriptionSchema);
 
 export { InscriptionModel };

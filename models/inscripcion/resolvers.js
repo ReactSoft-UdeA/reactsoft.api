@@ -1,6 +1,6 @@
-import { InscriptionModel } from "./inscription.js";
+import { InscriptionModel } from "./inscripcion.js";
 
-const resolversInscriptions = {
+const resolverInscripciones = {
   Query: {
     Inscripciones: async (parent, args) => {
       const inscripciones = await InscriptionModel.find();
@@ -12,7 +12,7 @@ const resolversInscriptions = {
       const inscripcionCreada = await InscriptionModel.create({
         estado: args.estado,
         proyecto: args.proyecto,
-        estudiante: args.estudiante, //id o nombre?
+        estudiante: args.estudiante,
       });
       return inscripcionCreada;
     },
@@ -29,4 +29,4 @@ const resolversInscriptions = {
   },
 };
 
-export { resolversInscriptions };
+export { resolverInscripciones };
