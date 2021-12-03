@@ -12,6 +12,24 @@ const tiposEnums = gql`
     Lider
     Administrador
   }
+
+  enum Enum_EstadoProyecto{
+        ACTIVO
+        INACTIVO
+  }
+
+  enum Enum_FaseProyecto{
+        INICIADO
+        DESARROLLO
+        TERMINADO
+        NULO
+    }
+
+    enum Enum_TipoObjetivo{
+        GENERAL
+        ESPECIFICO
+    }
+
 `;
 
 export { tiposEnums };
