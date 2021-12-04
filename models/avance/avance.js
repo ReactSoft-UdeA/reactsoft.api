@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { ProjectModel } from "../proyecto/proyecto.js";
 import { UserModel } from "../usuario/usuario.js";
+
 const { Schema, model } = mongoose;
 
 const avanceSchema = new Schema({
@@ -24,8 +25,8 @@ const avanceSchema = new Schema({
   },
   creadoPor: {
     type: Schema.Types.ObjectId,
-    ref: UserModel,
     required: true,
+    ref: UserModel,
   },
 });
 
