@@ -22,7 +22,8 @@ const resolversInscripciones = {
         {
           estado: "ACEPTADO",
           fechaIngreso: Date.now(),
-        }
+        },
+        { new: true}
       );
       return inscripcionAprobada;
     },
