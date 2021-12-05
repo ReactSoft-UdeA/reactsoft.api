@@ -110,6 +110,12 @@ const resolversProyecto = {
         },{new: true});
         return HU008;
     },
+    HU_009: async (parent, args, context) => {
+      const HU009 = await ProjectModel.findByIdAndUpdate(args.id, {
+          fase: args.fase,
+      },{new: true});
+      return HU009;
+  },
     HU_012: async (parent, args, context) => {
         const HU012 = await ProjectModel.create({
             nombre: args.nombre,

@@ -51,6 +51,13 @@ const tiposProyecto = gql`
       fase:Enum_FaseProyecto!
       objetivos:[Objetivo]
   }
+
+  type HU_009{
+      _id: ID!
+      nombre: String!
+      fase:Enum_FaseProyecto!
+  }
+
   type HU_012{
       _id: ID!
       nombre: String!
@@ -127,6 +134,12 @@ const tiposProyecto = gql`
         id: String!
         estado:Enum_EstadoProyecto!
     ): HU_008
+
+    HU_009(
+        id: String!
+        fase:Enum_FaseProyecto!
+    ): HU_009
+
     HU_012(
         nombre: String!
         presupuesto: Float!
