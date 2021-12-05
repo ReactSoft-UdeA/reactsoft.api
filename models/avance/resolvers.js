@@ -19,6 +19,8 @@ const resolversAvance = {
         observaciones: args.observaciones,
         proyecto: args.proyecto,
         usuarioRegistra: args.Usuarios,
+      },{
+        new:true
       });
       return avanceEditado;
     },
