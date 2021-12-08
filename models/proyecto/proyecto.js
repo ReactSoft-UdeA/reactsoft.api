@@ -57,12 +57,12 @@ const projectSchema = new Schema(
 );
 
 projectSchema.virtual("avances", {
-  ref: "Avance",
+  ref: "avance", //cambié mayúscula por minúscula
   localField: "_id",
   foreignField: "proyecto",
 });
 projectSchema.virtual("inscripciones", {
-  ref: "Inscripcion",
+  ref: "inscripcion",//cambié mayúscula por minúscula
   localField: "_id",
   foreignField: "proyecto",
 });

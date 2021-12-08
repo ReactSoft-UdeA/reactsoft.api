@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+import mongoose from 'mongoose';
 const { Schema, model } = mongoose;
 
 const userSchema = new Schema({
@@ -23,25 +23,25 @@ const userSchema = new Schema({
       validator: (email) => {
         return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
       },
-      message: "Ingrese un correo electrónico válido",
+      message: 'Ingrese un correo electrónico válido',
     },
   },
   rol: {
     type: String,
     required: true,
-    enum: ["ESTUDIANTE", "LIDER", "ADMINISTRADOR"],
+    enum: ['ESTUDIANTE', 'LIDER', 'ADMINISTRADOR'],
   },
   estado: {
     type: String,
-    enum: ["PENDIENTE", "AUTORIZADO", "NO_AUTORIZADO"],
-    default: "PENDIENTE",
+    enum: ['PENDIENTE', 'AUTORIZADO', 'No_Autorizado'],
+    default: 'PENDIENTE',
   },
-  clave: {
+  clave:{
     type: String,
     required: true,
   },
 });
 
-const UserModel = model("usuarios", userSchema);
+const UserModel = model('usuarios', userSchema);
 
 export { UserModel };
