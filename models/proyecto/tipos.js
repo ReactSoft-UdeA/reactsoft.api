@@ -102,6 +102,7 @@ const tiposProyecto = gql`
   type Query {
     Proyectos: [Proyecto]
     ProyectosPorLider(_id:String!):[Proyecto]
+    ProyectosPorId(_id:String!):[Proyecto]
     HU_006: [HU_006]
     HU_017(_id:String!): HU_017
     HU_019: [HU_019]

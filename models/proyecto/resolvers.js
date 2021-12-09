@@ -33,6 +33,10 @@ const resolversProyecto = {
         const HU019 = await ProjectModel.find();
         return HU019;
     },
+    ProyectosPorId: async(parent, args)=>{
+       let proyecto = await ProjectModel.find({_id:args._id}); 
+       return proyecto;
+    }
   },
   Mutation: {
     crearProyecto: async (parent, args) => {
