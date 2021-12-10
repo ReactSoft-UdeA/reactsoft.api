@@ -1,3 +1,5 @@
+import Mongoose from "mongoose";
+const { ObjectId } = Mongoose.Types;
 import { ProjectModel } from "./proyecto.js";
 
 const resolversProyecto = {
@@ -8,6 +10,13 @@ const resolversProyecto = {
         .populate("avances")
         .populate('inscripciones');
       return proyectos;
+    },
+    ProyectosPorLider: async (parent, args) => {
+      const proyectosLider = await ProjectModel.find({'lider':args._id})
+        .populate("lider")
+        .populate("avances")
+        .populate('inscripciones');
+      return proyectosLider;
     },
     HU_006: async(parent, args) => {
       const HU006 = await ProjectModel.find();
@@ -24,6 +33,13 @@ const resolversProyecto = {
         const HU019 = await ProjectModel.find();
         return HU019;
     },
+    ProyectosPorId: async(parent, args)=>{
+       let proyecto = await ProjectModel.find({_id:args._id}) 
+        .populate('lider')
+        .populate('avances')
+        .populate('inscripciones');
+       return proyecto;
+    }
   },
   Mutation: {
     crearProyecto: async (parent, args) => {
