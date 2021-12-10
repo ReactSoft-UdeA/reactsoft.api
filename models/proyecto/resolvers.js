@@ -34,7 +34,10 @@ const resolversProyecto = {
         return HU019;
     },
     ProyectosPorId: async(parent, args)=>{
-       let proyecto = await ProjectModel.find({_id:args._id}); 
+       let proyecto = await ProjectModel.find({_id:args._id}) 
+        .populate('lider')
+        .populate('avances')
+        .populate('inscripciones');
        return proyecto;
     }
   },
