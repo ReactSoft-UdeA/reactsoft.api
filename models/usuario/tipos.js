@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 const tiposUsuario = gql`
   type Usuario {
@@ -9,6 +9,9 @@ const tiposUsuario = gql`
     correo: String!
     rol: Enum_Rol!
     estado: Enum_EstadoUsuario
+    inscripciones: [Inscripcion]
+    avancesCreados: [Avance]
+    proyectosLiderados: [Proyecto]
   }
 
   type Query {
