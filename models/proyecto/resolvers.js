@@ -1,52 +1,32 @@
-import Mongoose from "mongoose";
-const { ObjectId } = Mongoose.Types;
-import { ProjectModel } from "./proyecto.js";
+import { InscriptionModel } from '../inscripcion/inscripcion.js';
+import { UserModel } from '../usuario/usuario.js';
+import { ProjectModel } from './proyecto.js';
 
 const resolversProyecto = {
+  Proyecto: {
+    lider: async (parent, args, context) => {
+      const usr = await UserModel.findOne({
+        _id: parent.lider.toString(),
+      });
+      return usr;
+    },
+    inscripciones: async (parent, args, context) => {
+      const inscripciones = await InscriptionModel.find({
+        proyecto: parent._id,
+      });
+      return inscripciones;
+    },
+  },
   Query: {
-    Proyectos: async (parent, args) => {
-      const proyectos = await ProjectModel.find()
-        .populate("lider")
-        .populate("avances")
-        .populate('inscripciones');
+    Proyectos: async (parent, args, context) => {
+      const proyectos = await ProjectModel.find();
       return proyectos;
     },
-    ProyectosPorLider: async (parent, args) => {
-      const proyectosLider = await ProjectModel.find({'lider':args._id})
-        .populate("lider")
-        .populate("avances")
-        .populate('inscripciones');
-      return proyectosLider;
-    },
-    HU_006: async(parent, args) => {
-      const HU006 = await ProjectModel.find();
-      return HU006;
-    },
-    HU_017: async(parent, args) => {
-      const HU017 = await ProjectModel.findOne({_id: args._id})
-        .populate('lider')
-        .populate('avances')
-        .populate('inscripciones');
-      return HU017;
-    },
-    HU_019: async(parent, args) => {
-        const HU019 = await ProjectModel.find();
-        return HU019;
-    },
-    ProyectosPorId: async(parent, args)=>{
-       let proyecto = await ProjectModel.find({_id:args._id}) 
-        .populate('lider')
-        .populate('avances')
-        .populate('inscripciones');
-       return proyecto;
-    }
   },
   Mutation: {
-    crearProyecto: async (parent, args) => {
+    crearProyecto: async (parent, args, context) => {
       const proyectoCreado = await ProjectModel.create({
         nombre: args.nombre,
-        estado: args.estado,
-        fase: args.fase,
         fechaInicio: args.fechaInicio,
         fechaFin: args.fechaFin,
         presupuesto: args.presupuesto,
@@ -55,36 +35,54 @@ const resolversProyecto = {
       });
       return proyectoCreado;
     },
-    HU_007: async (parent, args) => {
-      const HU007 = await ProjectModel.findByIdAndUpdate(args.id, {
-          estado: 'ACTIVO',
-      },{new: true});
-      return HU007;
+    editarProyecto: async (parent, args) => {
+      const proyectoEditado = await ProjectModel.findByIdAndUpdate(
+        args._id,
+        { ...args.campos },
+        { new: true }
+      );
+
+      return proyectoEditado;
     },
-    HU_008: async (parent, args) => {
-        const HU008 = await ProjectModel.findByIdAndUpdate(args.id, {
-            estado: args.estado,
-        },{new: true});
-        return HU008;
+    crearObjetivo: async (parent, args) => {
+      const proyectoConObjetivo = await ProjectModel.findByIdAndUpdate(
+        args.idProyecto,
+        {
+          $addToSet: {
+            objetivos: { ...args.campos },
+          },
+        },
+        { new: true }
+      );
+
+      return proyectoConObjetivo;
     },
-    HU_012: async (parent, args) => {
-        const HU012 = await ProjectModel.create({
-            nombre: args.nombre,
-            fechaInicio: args.fechaInicio,
-            fechaFin: args.fechaFin,
-            presupuesto: args.presupuesto,
-            lider: args.lider,
-            objetivos: args.objetivos
-        });
-        return HU012;
+    editarObjetivo: async (parent, args) => {
+      const proyectoEditado = await ProjectModel.findByIdAndUpdate(
+        args.idProyecto,
+        {
+          $set: {
+            [`objetivos.${args.indexObjetivo}.descripcion`]: args.campos.descripcion,
+            [`objetivos.${args.indexObjetivo}.tipo`]: args.campos.tipo,
+          },
+        },
+        { new: true }
+      );
+      return proyectoEditado;
     },
-    HU_014: async (parent, args) => {
-        const HU014 = await ProjectModel.findByIdAndUpdate(args.id, {
-            nombre: args.nombre,
-            objetivos: args.objetivos,
-            presupuesto: args.presupuesto
-        },{new: true});
-        return HU014;
+    eliminarObjetivo: async (parent, args) => {
+      const proyectoObjetivo = await ProjectModel.findByIdAndUpdate(
+        { _id: args.idProyecto },
+        {
+          $pull: {
+            objetivos: {
+              _id: args.idObjetivo,
+            },
+          },
+        },
+        { new: true }
+      );
+      return proyectoObjetivo;
     },
   },
 };

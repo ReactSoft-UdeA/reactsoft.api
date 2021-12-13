@@ -1,40 +1,49 @@
-import conectarBD from "./db/db.js";
 import express from "express";
+import cors from "cors";
+import { ApolloServer } from "apollo-server-express";
+import dotenv from "dotenv";
+import conectarBD from "./db/db.js";
+import { tipos } from "./graphql/types.js";
+import { resolvers } from "./graphql/resolvers.js";
+import { validateToken } from "./utils/tokenUtils.js";
 
-import cors from 'cors';
-import {ApolloServer} from 'apollo-server-express';
-import dotenv from 'dotenv';
-import {tipos} from './graphql/types.js';
-import {resolvers} from './graphql/resolvers.js'
-
-
-//para que nos deje utilizar las variables de entorno en toda la aplicacion
 dotenv.config();
 
-//Definir servidor GraphQL
-const server = new ApolloServer({
+const getUserData = (token) => {
+  const verificacion = validateToken(token.split(" ")[1]);
+  if (verificacion.data) {
+    return verificacion.data;
+  } else {
+    return null;
+  }
+};
 
-    //Definiciones de cada uno de los modelos
-    typeDefs: tipos,
-    //Controladores
-    resolvers: resolvers,
+const server = new ApolloServer({
+  typeDefs: tipos,
+  resolvers: resolvers,
+  context: ({ req, res }) => {
+    const token = req.headers?.authorization ?? null;
+    if (token) {
+      const userData = getUserData(token);
+      if (userData) {
+        return { userData };
+      }
+    }
+    return null;
+  },
 });
 
-//Aplicacion express
 const app = express();
 
-//Middleware express.json, para que los request entren y salgan de tipo json
 app.use(express.json());
 
-//Middleware de cors; para poder hacer desde muchos origenes
 app.use(cors());
 
-//Puerto de escucha, onde corre el servidor
 app.listen({ port: process.env.PORT || 4000 }, async () => {
   await conectarBD();
   await server.start();
 
   server.applyMiddleware({ app });
 
-  console.log("Servidor GraphQL de ReactSoft Listo!!");
+  console.log("servidor listo");
 });

@@ -1,32 +1,27 @@
-import modeloAvance from "./avance.js";
+import { ModeloAvance } from './avance.js';
 
 const resolversAvance = {
   Query: {
     Avances: async (parent, args) => {
-      const getAllAvances = await modeloAvance.find({creadoPor:args._id}).populate("creadoPor").populate("proyecto");
-      return getAllAvances;
+      const avances = await ModeloAvance.find().populate('proyecto').populate('creadoPor');
+      return avances;
+    },
+    filtrarAvance: async (parents, args) => {
+      const avanceFiltrado = await ModeloAvance.find({ proyecto: args._id })
+        .populate('proyecto')
+        .populate('creadoPor');
+      return avanceFiltrado;
     },
   },
   Mutation: {
-    CrearAvance: async (parent, args) => {
-      const avanceCreado = await modeloAvance.create(args);
-      return avanceCreado;
-    },
-    EditarAvance: async (parent, args) => {
-      const avanceEditado = await modeloAvance.findOneAndUpdate(args._id, {
-        fechaAvance: args.fechaAvance,
+    crearAvance: async (parents, args) => {
+      const avanceCreado = ModeloAvance.create({
+        fecha: args.fecha,
         descripcion: args.descripcion,
-        observaciones: args.observaciones,
         proyecto: args.proyecto,
-        usuarioRegistra: args.Usuarios,
-      },{
-        new:true
+        creadoPor: args.creadoPor,
       });
-      return avanceEditado;
-    },
-    EliminarAvance: async (parent, args) => {
-      const avanceEliminado = await modeloAvance.findOneAndDelete(args._id);
-      return avanceEliminado;
+      return avanceCreado;
     },
   },
 };

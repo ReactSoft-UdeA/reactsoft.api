@@ -1,52 +1,53 @@
 import mongoose from "mongoose";
 const { Schema, model } = mongoose;
 
-const userSchema = new Schema(
-  {
-    identificacion: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    nombre: {
-      type: String,
-      required: true,
-    },
-    apellido: {
-      type: String,
-      required: true,
-    },
-    correo: {
-      type: String,
-      required: true,
-      unique: true,
-      validate: {
-        validator: (email) => {
-          return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
-        },
-        message: "Ingrese un correo electrónico válido",
+const userSchema = new Schema({
+  correo: {
+    type: String,
+    required: true,
+    unique: true,
+    validate: {
+      validator: (email) => {
+        return /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email);
       },
-    },
-    rol: {
-      type: String,
-      required: true,
-      enum: ["ESTUDIANTE", "LIDER", "ADMINISTRADOR"],
-    },
-    estado: {
-      type: String,
-      enum: ["PENDIENTE", "AUTORIZADO", "NO_AUTORIZADO"],
-      default: "PENDIENTE",
-    },
-    clave: {
-      type: String,
-      required: true,
+      // (email) => {
+      //   if (email.includes('@') && email.includes('.')) {
+      //     return true;
+      //   } else {
+      //     return false;
+      //   }
+      // },
+      message: "El formato del correo electrónico está malo.",
     },
   },
-  {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-  }
-);
+  password: {
+    type: String,
+    required: true,
+  },
+  identificacion: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  nombre: {
+    type: String,
+    required: true,
+  },
+  apellido: {
+    type: String,
+    required: true,
+  },
+  rol: {
+    type: String,
+    required: true,
+    enum: ["ESTUDIANTE", "LIDER", "ADMINISTRADOR"],
+  },
+  estado: {
+    type: String,
+    enum: ["PENDIENTE", "AUTORIZADO", "NO_AUTORIZADO"],
+    default: "PENDIENTE",
+  },
+});
 
 userSchema.virtual("proyectosLiderados", {
   ref: "Proyecto",
@@ -66,6 +67,6 @@ userSchema.virtual("inscripciones", {
   foreignField: "estudiante",
 });
 
-const UserModel = model("usuarios", userSchema);
+const UserModel = model("User", userSchema);
 
 export { UserModel };

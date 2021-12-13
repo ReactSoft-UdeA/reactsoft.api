@@ -1,22 +1,17 @@
-import { UserModel } from "./usuario.js";
-import bcrypt from "bcrypt";
+import { UserModel } from './usuario.js';
+import bcrypt from 'bcrypt';
+import { InscriptionModel } from '../inscripcion/inscripcion.js';
 
 const resolversUsuario = {
+  Usuario: {
+    inscripciones: async (parent, args, context) => {
+      return InscriptionModel.find({ estudiante: parent._id });
+    },
+  },
   Query: {
-    Usuarios: async (parent, args) => {
-      console.log("parent usuario", parent);
-      const usuarios = await UserModel.find().populate([
-        {
-          path: "inscripciones",
-          populate: {
-            path: "proyecto",
-            populate: [{ path: "lider" }, { path: "avances" }],
-          },
-        },
-        {
-          path: "proyectosLiderados",
-        },
-      ]);
+    Usuarios: async (parent, args, context) => {
+      console.log(args);
+      const usuarios = await UserModel.find({ ...args.filtro });
       return usuarios;
     },
     Usuario: async (parent, args) => {
@@ -27,17 +22,17 @@ const resolversUsuario = {
   Mutation: {
     crearUsuario: async (parent, args) => {
       const salt = await bcrypt.genSalt(10);
-      const hashedPassword = await bcrypt.hash(args.clave, salt);
+      const hashedPassword = await bcrypt.hash(args.password, salt);
       const usuarioCreado = await UserModel.create({
         nombre: args.nombre,
         apellido: args.apellido,
         identificacion: args.identificacion,
         correo: args.correo,
         rol: args.rol,
-        clave: hashedPassword,
+        password: hashedPassword,
       });
 
-      if (Object.keys(args).includes("estado")) {
+      if (Object.keys(args).includes('estado')) {
         usuarioCreado.estado = args.estado;
       }
 
@@ -51,9 +46,7 @@ const resolversUsuario = {
           apellido: args.apellido,
           identificacion: args.identificacion,
           correo: args.correo,
-          // rol: args.rol,
           estado: args.estado,
-          // clave: args.clave,
         },
         { new: true }
       );
@@ -61,15 +54,11 @@ const resolversUsuario = {
       return usuarioEditado;
     },
     eliminarUsuario: async (parent, args) => {
-      if (Object.keys(args).includes("_id")) {
-        const usuarioEliminado = await UserModel.findOneAndDelete({
-          _id: args._id,
-        });
+      if (Object.keys(args).includes('_id')) {
+        const usuarioEliminado = await UserModel.findOneAndDelete({ _id: args._id });
         return usuarioEliminado;
-      } else if (Object.keys(args).includes("correo")) {
-        const usuarioEliminado = await UserModel.findOneAndDelete({
-          correo: args.correo,
-        });
+      } else if (Object.keys(args).includes('correo')) {
+        const usuarioEliminado = await UserModel.findOneAndDelete({ correo: args.correo });
         return usuarioEliminado;
       }
     },
