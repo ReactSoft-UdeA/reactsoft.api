@@ -22,6 +22,10 @@ const resolversProyecto = {
       const proyectos = await ProjectModel.find();
       return proyectos;
     },
+    Proyecto: async (parent, args) => {
+      const proyecto = await ProjectModel.findOne({ _id: args._id });
+      return proyecto;
+    },
   },
   Mutation: {
     crearProyecto: async (parent, args, context) => {
@@ -44,6 +48,21 @@ const resolversProyecto = {
 
       return proyectoEditado;
     },
+    
+    proyectoFaseEstado: async (parent, args) => {
+      const proyectoEditadoFaseEstado = await ProjectModel.findByIdAndUpdate(
+        args._id,
+        { 
+          estado: args.estado,
+          fase: args.fase, 
+          },
+        { new: true }
+      );
+       
+      return proyectoEditadoFaseEstado;
+    },
+
+
     crearObjetivo: async (parent, args) => {
       const proyectoConObjetivo = await ProjectModel.findByIdAndUpdate(
         args.idProyecto,

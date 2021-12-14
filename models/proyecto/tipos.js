@@ -41,8 +41,21 @@ const tiposProyecto = gql`
     inscripciones: [Inscripcion]
   }
 
+  type projectFaseEstado{
+        _id: ID!
+        nombre: String!
+        presupuesto: Float!
+        fechaInicio:Date!
+        fechaFin:Date!
+        estado:Enum_EstadoProyecto!
+        fase:Enum_FaseProyecto!
+        # lider:Usuario!
+        # objetivos:[Objetivo]
+    }
+
   type Query {
     Proyectos: [Proyecto]
+    Proyecto(_id: String!): Proyecto
   }
 
   type Mutation {
@@ -54,6 +67,12 @@ const tiposProyecto = gql`
       lider: String!
       objetivos: [crearObjetivo]
     ): Proyecto
+
+    proyectoFaseEstado(
+      _id: String!
+      estado:Enum_EstadoProyecto!
+      fase:Enum_FaseProyecto!
+    ): projectFaseEstado
 
     editarProyecto(_id: String!, campos: camposProyecto!): Proyecto
 
