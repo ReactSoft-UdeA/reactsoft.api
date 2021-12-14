@@ -1,6 +1,8 @@
-import { InscriptionModel } from '../inscripcion/inscripcion.js';
-import { UserModel } from '../usuario/usuario.js';
-import { ProjectModel } from './proyecto.js';
+// import Mongoose from "mongoose";
+// const { ObjectId } = Mongoose.Types;
+import { InscriptionModel } from "../inscripcion/inscripcion.js";
+import { UserModel } from "../usuario/usuario.js";
+import { ProjectModel } from "./proyecto.js";
 
 const resolversProyecto = {
   Proyecto: {
@@ -21,6 +23,13 @@ const resolversProyecto = {
     Proyectos: async (parent, args, context) => {
       const proyectos = await ProjectModel.find();
       return proyectos;
+    },
+    ProyectosPorId: async (parent, args) => {
+      let proyecto = await ProjectModel.find({ _id: args._id });
+      // .populate("lider")
+      // .populate("avances")
+      // .populate("inscripciones");
+      return proyecto;
     },
   },
   Mutation: {
@@ -62,7 +71,8 @@ const resolversProyecto = {
         args.idProyecto,
         {
           $set: {
-            [`objetivos.${args.indexObjetivo}.descripcion`]: args.campos.descripcion,
+            [`objetivos.${args.indexObjetivo}.descripcion`]:
+              args.campos.descripcion,
             [`objetivos.${args.indexObjetivo}.tipo`]: args.campos.tipo,
           },
         },

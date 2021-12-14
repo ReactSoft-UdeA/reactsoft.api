@@ -46,4 +46,5 @@ app.listen({ port: process.env.PORT || 4000 }, async () => {
   server.applyMiddleware({ app });
 
   console.log("servidor listo");
+  // console.log("servidor listo");
 });
