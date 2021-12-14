@@ -19,20 +19,30 @@ const resolversAutenticacion = {
             console.log('usuario creado', usuarioCreado);
             return {
                 token: generateToken({
-                    _id: usuarioCreado._id,
-                    nombre: usuarioCreado.nombre,
-                    apellido: usuarioCreado.apellido,
-                    identificacion: usuarioCreado.identificacion,
-                    correo: usuarioCreado.correo,
-                    rol: usuarioCreado.rol,
+                    _id:usuarioCreado._id,
+                    nombre:usuarioCreado.nombre,
+                    apellido:usuarioCreado.apellido,
+                    identificacion:usuarioCreado.identificacion,
+                    correo:usuarioCreado.correo,
+                    rol:usuarioCreado.rol,
                 })
             }
         },
 
-        login: async(parent, args) => {
-            console.log(args);
-            return{
-                token: 'Hola soy el token',
+        login: async (parent, args) =>{
+            const usuarioEncontrado = await UserModel.findOne({correo: args.correo});
+            if (await bcrypt.compare(args.clave, usuarioEncontrado.clave)){
+            console.log('Inicio sesión correcto', usuarioEncontrado)
+                return{
+                    token: generateToken({
+                        _id: usuarioEncontrado._id,
+                        nombre: usuarioEncontrado.nombre,
+                        apellido: usuarioEncontrado.apellido,
+                        identificacion: usuarioEncontrado.identificacion,
+                        correo: usuarioEncontrado.correo,
+                        rol: usuarioEncontrado.rol,
+                    })
+                }
             }
         }
     }
