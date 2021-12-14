@@ -25,6 +25,7 @@ const server = new ApolloServer({
     const token = req.headers?.authorization ?? null;
     if (token) {
       const userData = getUserData(token);
+      // console.log("usuario:", userData._id);
       if (userData) {
         return { userData };
       }
@@ -33,6 +34,7 @@ const server = new ApolloServer({
   },
 });
 
+// console.log("usuario:", userData._id);
 const app = express();
 
 app.use(express.json());
