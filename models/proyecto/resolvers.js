@@ -1,5 +1,5 @@
-// import Mongoose from "mongoose";
-// const { ObjectId } = Mongoose.Types;
+import Mongoose from "mongoose";
+const { ObjectId } = Mongoose.Types;
 import { InscriptionModel } from "../inscripcion/inscripcion.js";
 import { UserModel } from "../usuario/usuario.js";
 import { ProjectModel } from "./proyecto.js";
@@ -30,6 +30,13 @@ const resolversProyecto = {
       // .populate("avances")
       // .populate("inscripciones");
       return proyecto;
+    },
+    ProyectosPorLider: async (parent, args) => {
+      const proyectosLider = await ProjectModel.find({ lider: args._id });
+      // .populate("lider")
+      // .populate("avances")
+      // .populate("inscripciones");
+      return proyectosLider;
     },
   },
   Mutation: {
