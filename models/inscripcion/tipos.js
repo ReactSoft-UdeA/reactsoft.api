@@ -1,4 +1,4 @@
-import { gql } from 'apollo-server-express';
+import { gql } from "apollo-server-express";
 
 const tiposInscripcion = gql`
   type Inscripcion {
@@ -12,6 +12,7 @@ const tiposInscripcion = gql`
 
   type Query {
     Inscripciones: [Inscripcion]
+    ProyectosInscritos(_id: String!): [Inscripcion]
   }
 
   type Mutation {

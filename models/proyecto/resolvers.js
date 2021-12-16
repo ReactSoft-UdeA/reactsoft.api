@@ -39,6 +39,15 @@ const resolversProyecto = {
       // .populate("inscripciones");
       return proyectosLider;
     },
+    // ProyectosPorInscripcion: async (parent, args) => {
+    //   const proyectosInscripcion = await ProjectModel.find({
+    //     inscripciones: args._id,
+    //   });
+    // .populate("lider")
+    // .populate("avances")
+    // .populate("inscripciones");
+    // return proyectosInscripcion;
+    // },
   },
   Mutation: {
     crearProyecto: async (parent, args, context) => {
