@@ -39,6 +39,12 @@ const resolversProyecto = {
       // .populate("inscripciones");
       return proyectosLider;
     },
+
+    ProyectoEstadoFase: async (parent, args) => {
+      const proyecto = await ProjectModel.findOne({ _id: args._id });
+      return proyecto;
+    },
+
     // ProyectosPorInscripcion: async (parent, args) => {
     //   const proyectosInscripcion = await ProjectModel.find({
     //     inscripciones: args._id,
@@ -70,6 +76,20 @@ const resolversProyecto = {
 
       return proyectoEditado;
     },
+
+    proyectoFaseEstado: async (parent, args) => {
+      const proyectoEditadoFaseEstado = await ProjectModel.findByIdAndUpdate(
+        args._id,
+        { 
+          estado: args.estado,
+          fase: args.fase, 
+          },
+        { new: true }
+      );
+
+      return proyectoEditadoFaseEstado;
+    },
+
     crearObjetivo: async (parent, args) => {
       const proyectoConObjetivo = await ProjectModel.findByIdAndUpdate(
         args.idProyecto,
