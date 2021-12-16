@@ -11,6 +11,7 @@ const tiposInscripcion = gql`
   }
 
   type Query {
+    InscripcionesXusuario(estado:String): Inscripcion
     Inscripciones: [Inscripcion]
   }
 

@@ -10,7 +10,7 @@ const projectSchema = new Schema(
       required: true,
     },
     presupuesto: {
-      type: Number,
+      type: String,
       required: true,
     },
     fechaInicio: {

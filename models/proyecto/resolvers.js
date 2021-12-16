@@ -78,8 +78,8 @@ const resolversProyecto = {
         });
         return HU012;
     },
-    HU_014: async (parent, args) => {
-        const HU014 = await ProjectModel.findByIdAndUpdate(args.id, {
+    editarProyecto: async (parent, args) => {
+        const HU014 = await ProjectModel.findByIdAndUpdate(args._id, {
             nombre: args.nombre,
             objetivos: args.objetivos,
             presupuesto: args.presupuesto

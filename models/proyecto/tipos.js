@@ -52,7 +52,7 @@ const tiposProyecto = gql`
       objetivos:[Objetivo]
     }
 
-    type HU_014{
+    type editarProyectoType{
       _id: ID!
       nombre: String!
       presupuesto: Float!
@@ -137,12 +137,12 @@ const tiposProyecto = gql`
         objetivos:[crearObjetivo]
       ): HU_012
 
-      HU_014(
-        id: String!
+      editarProyecto(
+        _id: String!
         nombre: String!
         presupuesto: Float!
         objetivos:[actualizarObjetivo]
-      ): HU_014
+      ): editarProyectoType
   } 
 
 `;
