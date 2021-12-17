@@ -36,30 +36,6 @@ const resolverInscripciones = {
       });
       return inscripciones;
     },
-    // ProyectosInscritos: async (parent, args, context) => {
-    //   let filtro = {};
-    //   if (context.userData) {
-    //     if (context.userData.rol === "ESTUDIANTE") {
-    //       const inscripciones = await InscriptionModel.find({
-    //         estudiante: userData._id,
-    //       });
-    //       const inscripcionesList = inscripciones.map((p) => p._id.toString());
-    //       filtro = {
-    //         inscripcion: {
-    //           $in: inscripcionesList,
-    //         },
-    //       };
-    //     }
-    //   }
-    //   const proyectosEstudiante = await ProjectModel.find({
-    //     ...filtro,
-    //   });
-    //   return proyectosEstudiante;
-    // },
-
-    // inscripcionesNoAprobadas: async () => {
-    //   const ina = await InscriptionModel.find({ estado: 'PENDIENTE' }).populate('estudiante');
-    // },
   },
   Mutation: {
     crearInscripcion: async (parent, args) => {
