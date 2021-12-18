@@ -68,11 +68,17 @@ const resolversProyecto = {
       return proyectoCreado;
     },
     editarProyecto: async (parent, args) => {
-      const proyectoEditado = await ProjectModel.findByIdAndUpdate(
-        args._id,
-        { ...args.campos },
-        { new: true }
-      );
+      console.log("Hhhhhol juan");
+      console.log(args);
+      console.log(args._id);
+      const proyectoEditado = await ProjectModel.updateOne({
+        _id:args._id,
+        campos:{...args.campos}
+        /* { ...args.campos },
+        { new: true } */
+      });
+      console.log("Hhhhhol juan");
+      console.log(proyectoEditado);
 
       return proyectoEditado;
     },
