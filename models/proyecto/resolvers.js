@@ -34,9 +34,9 @@ const resolversProyecto = {
     },
     ProyectosPorLider: async (parent, args) => {
       const proyectosLider = await ProjectModel.find({ lider: args._id });
-      // .populate("lider")
-      // .populate("avances")
-      // .populate("inscripciones");
+      //.populate("lider")
+      //.populate("avances")
+      //.populate("inscripciones");
       return proyectosLider;
     },
 
@@ -68,18 +68,19 @@ const resolversProyecto = {
       return proyectoCreado;
     },
     editarProyecto: async (parent, args) => {
-      console.log("Hhhhhol juan");
-      console.log(args);
-      console.log(args._id);
-      const proyectoEditado = await ProjectModel.updateOne({
-        _id:args._id,
-        campos:{...args.campos}
-        /* { ...args.campos },
-        { new: true } */
-      });
-      console.log("Hhhhhol juan");
-      console.log(proyectoEditado);
 
+      const proyectoEditado = await ProjectModel.findOneAndUpdate(
+        args._id,
+        { ...args.campos },
+        { new: true }
+      )
+
+      /* const proyectoEditado = await ProjectModel.findByIdAndUpdate(
+        args._id,
+        { ...args.campos },
+        { new: true }
+      ); */
+      
       return proyectoEditado;
     },
 
