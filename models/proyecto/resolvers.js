@@ -76,17 +76,17 @@ const resolversProyecto = {
     },
     editarProyecto: async (parent, args) => {
 
-      const proyectoEditado = await ProjectModel.findOneAndUpdate(
+      /* const proyectoEditado = await ProjectModel.findOneAndUpdate(
         args._id,
         { ...args.campos },
         { new: true }
-      )
+      ) */
 
-      /* const proyectoEditado = await ProjectModel.findByIdAndUpdate(
+      const proyectoEditado = await ProjectModel.findByIdAndUpdate(
         args._id,
         { ...args.campos },
         { new: true }
-      ); */
+      );
       
       return proyectoEditado;
     },
