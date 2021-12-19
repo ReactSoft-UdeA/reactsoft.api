@@ -29,7 +29,7 @@ const resolversAvance = {
       });
       return avanceCreado;
     },
-    editarAvance:async(parent,args)=>{
+    editarAvanceObs:async(parent,args)=>{
       const observacion = ModeloAvance.findOneAndUpdate(
       {_id:args._id},
       {$push:{observaciones:
@@ -40,8 +40,8 @@ const resolversAvance = {
   {new:true}
      )
      return observacion;
-    }
-    /* editarAvance: async (parent, args) => {
+    },
+    editarAvance: async (parent, args) => {
       const avanceEditado = await ModeloAvance.findByIdAndUpdate(
         { _id: args._id },
         {
@@ -52,7 +52,7 @@ const resolversAvance = {
       );
 
       return avanceEditado;
-    }, */
+    },
   },
 };
 
