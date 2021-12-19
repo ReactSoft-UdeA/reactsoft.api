@@ -23,6 +23,18 @@ const resolversAvance = {
       });
       return avanceCreado;
     },
+    editarAvance:async(parent,args)=>{
+      const observacion = ModeloAvance.findOneAndUpdate(
+      {_id:args._id},
+      {$push:{observaciones:
+        {$each:[args.observaciones]
+        }
+      }
+  },
+  {new:true}
+     )
+     return observacion;
+    }
   },
 };
 
