@@ -8,7 +8,8 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "test": "jest --forceExit"
   },
   "dependencies": {
     "apollo-server-express": "^3.5.0",
@@ -20,5 +21,15 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.13",
     "nodemon": "^2.0.15"
+  },
+  "devDependencies": {
+    "jest": "^27.4.5",
+    "supertest": "^6.1.6"
+  },
+  "jest": {
+    "testEnvironment": "node",
+    "coveragePathIgnorePatterns": [
+      "/node_modules/"
+    ]
   }
 }

@@ -46,7 +46,14 @@ app.listen({ port: process.env.PORT || 4000 }, async () => {
   await server.start();
 
   server.applyMiddleware({ app });
-
+  
   console.log("servidor listo");
   // console.log("servidor listo");
+  
+  app.get('/healt-check',(req,resp)=>{
+    resp.json("ok")
+  })
+
 });
+
+module.exports = app
