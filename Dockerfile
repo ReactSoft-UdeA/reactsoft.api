@@ -2,10 +2,10 @@ FROM node
 
 WORKDIR /investigacion
 
-COPY package*.json ./
+COPY package.json ./
 
-RUN yarn install
+RUN npm i
 
 COPY . ./
 
-CMD [ "yarn", "start" ]
+CMD [ "npm", "start" ]
